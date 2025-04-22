@@ -6,3 +6,9 @@
   margin-left: 10px;
   margin-bottom: 5px;
 }
+.card {
+  border-radius: 10px; /* Ajustează valoarea pentru rotunjire */
+  border: 1px solid #ccc; /* Opțional: pentru a face bordura vizibilă */
+  padding: 10px; /* Opțional: pentru spațiere */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Opțional: pentru un efect de umbră */
+}

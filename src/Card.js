@@ -3,6 +3,7 @@ export default function Card({
   title,
   description,
   deleteHandlerFN,
+  editHandlerFN,
   viewHandlerFN,
 }) {
   return (
@@ -17,11 +18,13 @@ export default function Card({
         display: "flex",
         justifyContent: "center",
       }}>
-      <input type="text" value={title}></input>
-      <input type="text" value={description}></input>
+      <div>
+        <input type="text" value={title}></input>
+        <input type="text" value={description}></input>
+      </div>
       <div className="cardButtons">
         <button onClick={deleteHandlerFN}>Delete</button>
-        <button>Edit</button>
+        <button onClick={editHandlerFN}>Edit</button>
         <button onClick={viewHandlerFN}>View</button>
       </div>
     </div>
