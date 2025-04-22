@@ -1,46 +1,47 @@
 import React, { useState, useEffect, useRef } from "react";
 import Card from "./Card";
 import "./ToDo.css";
+import CardManager from "./CardManager";
 
 export default function ToDo() {
   const [selectedToDo, setSelectedToDo] = useState("");
   const [isEditMode, setIsEditMode] = useState(false);
+
   let activityList = [
     {
-      id: 0,
       title: "Scrie în jurnal",
       description:
         "Notează gândurile și emoțiile tale de azi pentru claritate mentală.",
     },
     {
-      id: 1,
       title: "Citește 10 pagini dintr-o carte",
       description:
         "Alege o carte care te inspiră sau te ajută să înveți ceva nou.",
     },
     {
-      id: 2,
       title: "Fă 20 minute de mișcare",
       description:
         "Plimbare, stretching sau antrenament scurt pentru mai multă energie.",
     },
     {
-      id: 3,
       title: "Curăță un spațiu din casă",
       description: "Alege o zonă mică și fă ordine pentru o minte mai limpede.",
     },
     {
-      id: 4,
       title: "Stabilește 3 obiective pentru mâine",
       description: "Gândește-te la 3 lucruri importante de realizat mâine.",
     },
   ];
 
-  useEffect(() => {});
-
-  const [toDoList2, setToDoList2] = useState(activityList);
+  const manager = new CardManager();
+  // Adaugă elemente
+  activityList.map((item) => {
+    manager.addItem(item.title, item.description);
+  });
+  const [toDoList, setToDoList2] = useState(manager.getItems());
 
   function createNewHandlerFN() {
+    setSelectedToDo({ undefined });
     setIsEditMode(true);
   }
 
@@ -49,8 +50,8 @@ export default function ToDo() {
       alert("Title and description cannot be empty!");
       return;
     }
-    const updatedList = toDoList2.some((elem) => elem.id === selectedToDo.id)
-      ? toDoList2.map((elem) =>
+    const updatedList = toDoList.some((elem) => elem.id === selectedToDo.id)
+      ? toDoList.map((elem) =>
           elem.id === selectedToDo.id
             ? {
                 ...elem,
@@ -60,9 +61,9 @@ export default function ToDo() {
             : elem
         )
       : [
-          ...toDoList2,
+          ...toDoList,
           {
-            id: toDoList2.length,
+            id: toDoList.length,
             title: selectedToDo.title,
             description: selectedToDo.description,
           },
@@ -93,15 +94,16 @@ export default function ToDo() {
             alignItems: "center", // Centrează elementele pe orizontală
             gap: "20px", // Spațiere între buton și card-uri
           }}>
-          <button onClick={createNewHandlerFN}>Create new</button>
-
-          {toDoList2.map((elem, i) => (
+          {toDoList.map((elem, i) => (
             <Card
               key={i}
               title={elem.title}
               description={elem.description}
               deleteHandlerFN={() => {
-                setToDoList2(toDoList2.filter((item) => item !== elem));
+                setToDoList2(toDoList.filter((item) => item !== elem));
+                if (!isEditMode) {
+                  setSelectedToDo({ undefined });
+                }
               }}
               editHandlerFN={() => {
                 setSelectedToDo(elem);
@@ -120,6 +122,8 @@ export default function ToDo() {
             flexDirection: "column",
             gap: "10px",
           }}>
+          <button onClick={createNewHandlerFN}>Create new</button>
+
           <input
             style={{
               height: "50px",
