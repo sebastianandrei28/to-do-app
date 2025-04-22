@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Card from "./Card";
 import "./ToDo.css";
 import CardManager from "./CardManager";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 export default function ToDo() {
   const [selectedToDo, setSelectedToDo] = useState("");
@@ -38,7 +40,7 @@ export default function ToDo() {
   activityList.map((item) => {
     manager.addItem(item.title, item.description);
   });
-  const [toDoList, setToDoList2] = useState(manager.getItems());
+  const [toDoList, setToDoList] = useState(manager.getItems());
 
   function createNewHandlerFN() {
     setSelectedToDo({ undefined });
@@ -69,7 +71,7 @@ export default function ToDo() {
           },
         ];
 
-    setToDoList2(updatedList);
+    setToDoList(updatedList);
     setSelectedToDo({ undefined }); // Resetează selecția
     setIsEditMode(false); // Ieși din modul de editare
   }
@@ -100,7 +102,7 @@ export default function ToDo() {
               title={elem.title}
               description={elem.description}
               deleteHandlerFN={() => {
-                setToDoList2(toDoList.filter((item) => item !== elem));
+                setToDoList(toDoList.filter((item) => item !== elem));
                 if (!isEditMode) {
                   setSelectedToDo({ undefined });
                 }
