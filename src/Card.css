@@ -1,0 +1,8 @@
+.cardButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
