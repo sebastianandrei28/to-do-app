@@ -19,13 +19,13 @@ export default function Card({
         justifyContent: "center",
       }}>
       <div>
-        <input type="text" value={title}></input>
-        <input type="text" value={description}></input>
+        <input type="text" value={title} readOnly></input>
+        <input type="text" value={description} readOnly></input>
       </div>
       <div className="cardButtons">
-        <button onClick={deleteHandlerFN}>Delete</button>
         <button onClick={editHandlerFN}>Edit</button>
         <button onClick={viewHandlerFN}>View</button>
+        <button onClick={deleteHandlerFN}>Delete</button>
       </div>
     </div>
   );
