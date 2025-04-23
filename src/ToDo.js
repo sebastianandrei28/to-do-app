@@ -47,7 +47,7 @@ export default function ToDo() {
   }, [toDoList]);
 
   function createNewHandlerFN() {
-    setSelectedToDo({ undefined });
+    setSelectedToDo({ id: null, title: "", description: "" });
     setIsEditMode(true);
   }
 
