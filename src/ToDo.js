@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import "./ToDo.css";
 import CardManager from "./CardManager";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+// import { DndProvider } from "react-dnd";
+// import { HTML5Backend } from "react-dnd-html5-backend";
 
 const activityList = [
   {
@@ -34,9 +34,7 @@ const manager = new CardManager();
 
 (function () {
   // Adaugă elemente
-  activityList.map((item) => {
-    manager.addItem(item.title, item.description);
-  });
+  activityList.map((item) => manager.addItem(item.title, item.description));
 })();
 
 export default function ToDo() {
@@ -57,11 +55,9 @@ export default function ToDo() {
     setSelectedToDo({ undefined });
   }
   function handleDelete(id) {
-    // setToDoList(toDoList.filter((item) => item.id !== id));
-
     manager.deleteItem(id);
     setToDoList(manager.getItems());
-    setSelectedToDo(undefined); // Resetează selecția
+    resetSelection();
   }
 
   function handleEdit(elem) {
@@ -75,32 +71,31 @@ export default function ToDo() {
   }
 
   function saveHandlerFN() {
-    if (!selectedToDo.title || !selectedToDo.description) {
+    // validare
+    if (!isValidToDo(selectedToDo)) {
       alert("Title and description cannot be empty!");
       return;
     }
-    const updatedList = toDoList.some((elem) => elem.id === selectedToDo.id)
-      ? toDoList.map((elem) =>
-          elem.id === selectedToDo.id
-            ? {
-                ...elem,
-                title: selectedToDo.title,
-                description: selectedToDo.description,
-              }
-            : elem
-        )
-      : [
-          ...toDoList,
-          {
-            id: toDoList.length,
-            title: selectedToDo.title,
-            description: selectedToDo.description,
-          },
-        ];
+    if (selectedToDo.id)
+      manager.updateItem(selectedToDo.id, {
+        title: selectedToDo.title,
+        description: selectedToDo.description,
+      });
+    else {
+      manager.addItem(selectedToDo.title, selectedToDo.description);
+    }
+    // Actualizează lista și resetează starea
+    setToDoList(manager.getItems());
+    resetSelection();
+  }
 
-    setToDoList(updatedList);
-    setSelectedToDo({ undefined }); // Resetează selecția
-    setIsEditMode(false); // Ieși din modul de editare
+  function resetSelection() {
+    setSelectedToDo(null);
+    setIsEditMode(false);
+  }
+
+  function isValidToDo(toDo) {
+    return toDo?.title?.trim() && toDo?.description?.trim();
   }
 
   return (
@@ -146,7 +141,6 @@ export default function ToDo() {
               backgroundColor: isEditMode ? "white" : "#f0f0f0",
               color: isEditMode ? "black" : "#888",
             }}
-            type="text"
             placeholder="Title"
             value={selectedToDo?.title || ""}
             onChange={(e) => {
@@ -163,7 +157,6 @@ export default function ToDo() {
               backgroundColor: isEditMode ? "white" : "#f0f0f0",
               color: isEditMode ? "black" : "#888",
             }}
-            type="text"
             placeholder="Description"
             value={selectedToDo?.description || ""}
             onChange={(e) => {
