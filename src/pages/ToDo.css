@@ -1,0 +1,91 @@
+.App-link {
+  color: #05a5d1;
+}
+.header {
+  font-family: "Arial", sans-serif; /* Stilizează fontul */
+}
+
+.homepage {
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #2d3e50;
+  margin-bottom: 20um;
+}
+
+p {
+  font-size: 1.25rem;
+  color: #555;
+}
+
+.OpenNewViewEditMode {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.CreateNew {
+  background-color: #05a5d1;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column; /* Aranjează cardurile pe verticală */
+  gap: 15px; /* Spațiere între carduri */
+  width: 100%; /* Opțional: ajustează lățimea */
+}
+.container {
+  display: flex;
+  flex-direction: column; /* Aranjează elementele pe verticală */
+  align-items: center; /* Centrează elementele pe orizontală */
+  gap: 20px; /* Spațiere între buton și carduri */
+}
+
+/* Container principal */
+.todo-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efect de blur când formularul este vizibil */
+.todo-container.blurred {
+  filter: blur(5px); /* Aplica blur pe fundal */
+  pointer-events: none; /* Dezactivează interacțiunile cu fundalul */
+}
+
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundal semi-transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asigură că overlay-ul este deasupra */
+}
+
+/* Formular centrat */
+.todo-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  max-width: 90%;
+  z-index: 1001; /* Formularul este deasupra overlay-ului */
+}

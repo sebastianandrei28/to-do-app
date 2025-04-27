@@ -1,0 +1,63 @@
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.todo-form input:focus,
+.todo-form textarea:focus {
+  outline: none;
+  border-color: #05a5d1;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.todo-form button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.todo-form button.save {
+  background-color: #05a5d1;
+  color: white;
+}
+
+.todo-form button.save:hover {
+  background-color: #0288d1;
+}
+
+.todo-form button.cancel {
+  background-color: #f44336;
+  color: white;
+}
+
+.todo-form button.cancel:hover {
+  background-color: #d32f2f;
+}
+.todo-form input,
+.todo-form textarea {
+  resize: none;
+  width: 100%; /* sau cât vrei tu */
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  line-height: 1.5; /* spațiere între linii */
+  resize: none; /* să nu se poată trage de colțuri */
+  overflow-y: auto; /* scroll doar pe verticală dacă e nevoie */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.todo-form textarea {
+  height: 400px; /* aproximativ 25 de linii */
+}

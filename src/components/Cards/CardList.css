@@ -1,0 +1,31 @@
+.create-new-card {
+  width: 300px;
+  height: 200px;
+  background-color: #e0f7fa;
+  border: 2px dashed #0288d1;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.create-new-card:hover {
+  background-color: #b2ebf2;
+  transform: translateY(-5px);
+}
+
+.create-new-card h3 {
+  font-size: 1.5rem;
+  color: #0288d1;
+}
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Coloane flexibile */
+  gap: 50px; /* Spațiu între carduri */
+  padding: 20px;
+}

@@ -1,11 +1,13 @@
 // import { type } from "@testing-library/user-event/dist/type";
 
+import PersistanceAPI from "./PersistanceAPI";
+
 class CardManager {
   constructor() {
     this.items = [];
     this.lastId = 0;
   }
-  addItem(title, description) {
+  addItem(title, description, shouldPersist = true) {
     if (!title || !description) {
       throw new Error("Title and description are required.");
     }
@@ -16,6 +18,9 @@ class CardManager {
       createAt: new Date(),
     };
     this.items.push(newItem);
+    if (shouldPersist) {
+      this.persist();
+    }
     return newItem;
   }
   getItems() {
@@ -23,13 +28,12 @@ class CardManager {
   }
   deleteItem(id) {
     this.items = this.items.filter((item) => item.id !== id);
+    this.persist();
   }
 
   updateItem(id, updatedData) {
     const itemIndex = this.items.findIndex((item) => item.id === id);
     if (itemIndex === -1) {
-      // console.log(updatedData);
-      // this.addItem(updatedData.title, updatedData.description);
       //do nothing
     } else {
       this.items[itemIndex] = {
@@ -37,8 +41,13 @@ class CardManager {
         ...updatedData,
         updatedAt: new Date(),
       };
+      this.persist();
       return this.items[itemIndex];
     }
+  }
+
+  persist() {
+    PersistanceAPI.upsert(this.items);
   }
 }
 

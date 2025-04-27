@@ -1,0 +1,119 @@
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-content: center;
+  align-items: start;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .card-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card button {
+  background-color: #05a5d1;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.card button:hover {
+  background-color: #0288d1;
+}
+
+.card-description {
+  font-size: 1.2rem; /* Dimensiunea fontului */
+  color: #555; /* Culoarea textului */
+  line-height: 1.6; /* Spațiere între linii */
+  margin-top: 10px; /* Spațiu între titlu și descriere */
+  text-align: justify; /* Aliniere justificată pentru un aspect mai profesional */
+  overflow: hidden; /* Ascunde textul care depășește dimensiunea cardului */
+  text-overflow: ellipsis; /* Adaugă "..." dacă textul este prea lung */
+  white-space: normal; /* Permite textului să treacă pe mai multe rânduri */
+  display: -webkit-box; /* Activează un layout flexibil pentru text */
+  -webkit-box-orient: vertical; /* Setează orientarea pe verticală */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  width: 300px; /* Lățime fixă pentru toate cardurile */
+  height: 200px; /* Înălțime fixă pentru toate cardurile */
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribuie spațiul între elemente */
+  align-items: center; /* Centrează conținutul pe orizontală */
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-description {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.6;
+  margin-top: 10px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: calc(1.2rem * 2 * 1.6);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.cardButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.card input {
+  width: 90%;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.card input:focus {
+  outline: none;
+  border-color: #05a5d1;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
